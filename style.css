@@ -80,6 +80,7 @@ header h1 {
 .section {
   padding: 1.5rem 1rem;
   height: auto;
+  box-shadow: 0 0 0 0 rgba(0,0,0,0.1);
 }
 
 .section h2 {
@@ -243,48 +244,88 @@ header h1 {
           font-weight: bold;
         }
 
-        /* ======================
-          Bottom Navigation
-          ====================== */
-        .bottom-nav {
-          position: fixed;
-          bottom: 20px;
-          left: 50%;
-          transform: translateX(-50%);
-          background: var(--blur-bg);
-          background-color: rgba(0, 0, 0, 0.500);
-          backdrop-filter: blur(20px);
-          border-radius: 30px;
-          display: flex;
-          justify-content: space-around;
-          align-items: center;
-          width: 100%;
-          max-width: 500px;
-          padding: 12px 0;
-          box-shadow: 6px 6px 12px rgba(0,0,0,0.2),
-                      -6px -6px 12px rgba(255,255,255,0.1);
-          z-index: 999;
-        }
 
-        .bottom-nav a {
-          flex: 1;
-          text-align: center;
-          color: var(--light);
-          font-size: 11px;
-          text-decoration: none;
-          transition: all 0.3s ease;
-        }
+.bottom-nav {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 500px;
+    padding: 15px 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 6px 6px 12px rgba(0,0,0,0.2),
+                -6px -6px 12px rgba(255,255,255,0.1);
+    z-index: 999;
+}
 
-        .bottom-nav a i {
-          font-size: 18px;
-          display: block;
-          margin-bottom: 3px;
-        }
+/* Individual link container */
+.bottom-nav a {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--light);
+    position: relative;
+    transition: all 0.3s ease;
+}
 
-        .bottom-nav a.active, .bottom-nav a:hover {
-          color: var(--accent);
-          transform: translateY(-2px);
-        }
+/* Icon styling */
+.bottom-nav a i {
+    font-size: 20px;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.bottom-nav a span {
+    display: block;          /* keep it in the flow */
+    font-size: 12px;
+    max-height: 0;           /* hide visually */
+    opacity: 0;              /* invisible */
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Hover / active: icon moves up, text appears below */
+.bottom-nav a:hover i,
+.bottom-nav a.active i {
+  transform: translateY(2px) scale(1);
+}
+
+.bottom-nav a:hover span,
+.bottom-nav a.active span {
+    max-height: 20px;        /* enough to show text */
+    opacity: 1;
+}
+
+/* Glow for active/hover */
+.bottom-nav a:hover,
+.bottom-nav a.active {
+    color: var(--accent);
+    text-shadow: 0 0 8px rgba(255,255,255,0.2);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 400px) {
+    .bottom-nav {
+        padding: 12px 0;
+        border-radius: 25px;
+    }
+    .bottom-nav a i {
+        font-size: 18px;
+    }
+    .bottom-nav a span {
+        font-size: 10px;
+        margin-top: 4px;
+    }
+}
+
 
         /* ======================
           WhatsApp Floating Button
@@ -352,3 +393,18 @@ header h1 {
             bottom: 70px;
           }
         }
+
+        .products {
+  max-height: 500px; /* initial scrollable height */
+  overflow-y: auto;
+  transition: max-height 0.5s ease;
+}
+.products.expanded {
+  max-height: 2000px; /* big enough to fit all items */
+  overflow-y: hidden;
+}
+
+body {
+  padding-bottom: 160px; /* slightly more than bottom nav + WhatsApp button */
+}
+html { scroll-behavior: smooth; }

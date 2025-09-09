@@ -1,23 +1,25 @@
-// ===== View More / View Less =====
+// ===== View More / View Less with smooth expansion =====
 document.querySelectorAll('.view-more').forEach(button => {
     button.addEventListener('click', function(e) {
         e.preventDefault();
+
         const section = this.closest('.section');
         const products = section.querySelector('.products');
 
-        products.classList.toggle('expanded');
-        this.textContent = products.classList.contains('expanded') ? 'View Less' : 'View More';
+        const isExpanded = products.classList.toggle('expanded');
+        this.textContent = isExpanded ? 'View Less' : 'View More';
+
+        // Smooth scroll to top of section when expanding
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 });
 
-// ===== Highlight active bottom nav link while scrolling =====
+// ===== Bottom Nav Active Highlight =====
 const sections = document.querySelectorAll('section');
 const navLinks = document.querySelectorAll('.bottom-nav a');
 
 function updateActiveSection() {
-    const scrollPos = window.scrollY + window.innerHeight / 2;
-    console.log('Scroll Position:', scrollPos);
-    scrollPos-50;
+    const scrollPos = window.scrollY + window.innerHeight / 2; // middle of viewport
     let activeId = '';
 
     sections.forEach(section => {
@@ -33,24 +35,24 @@ function updateActiveSection() {
     if (activeId) {
         const activeLink = document.querySelector(`.bottom-nav a[href="#${activeId}"]`);
         if (activeLink) activeLink.classList.add('active');
-        console.log('Active Section:', activeId);
     }
 }
 
-// Update on scroll
+// Update active nav on scroll
 window.addEventListener('scroll', updateActiveSection);
+updateActiveSection(); // initial call
 
-// ===== Smooth scroll for nav links =====
+// ===== Smooth Scroll for Nav Links =====
 navLinks.forEach(link => {
     link.addEventListener('click', function(e) {
         e.preventDefault();
         const targetId = this.getAttribute('href').substring(1);
         const targetSection = document.getElementById(targetId);
         if (targetSection) {
-            targetSection.scrollIntoView({ behavior: 'smooth' });
+            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-            // Optional: manually update after scroll slightly delayed
-            setTimeout(updateActiveSection, 100);
+            // Update active nav after scroll
+            setTimeout(updateActiveSection, 300);
         }
     });
 });

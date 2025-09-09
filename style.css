@@ -72,7 +72,7 @@ header h1 {
 }
 
 .logo {
-  height: 40px;
+  height: 50px;
   width: auto;
   object-fit: contain;
 }
@@ -99,7 +99,6 @@ header h1 {
   height: auto;
   text-align: center;
   background: linear-gradient(160deg, var(--primary), var(--secondary));
-  border-radius: 20px;
   box-shadow: inset 2px 2px 12px rgba(0,0,0,0.35),
                 inset -2px -2px 12px rgba(255,255,255,0.1);
 }

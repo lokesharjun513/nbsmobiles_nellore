@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 * {
     margin: 0;
     padding: 0;
@@ -79,7 +79,7 @@ header h1 {
 
 .section {
   padding: 1.5rem 1rem;
-  min-height: 90vh;
+  height: auto;
 }
 
 .section h2 {
@@ -96,6 +96,7 @@ header h1 {
   align-items: center;
   flex-direction: column;
   min-height: 90vh;
+  height: auto;
   text-align: center;
   background: linear-gradient(160deg, var(--primary), var(--secondary));
   border-radius: 20px;
